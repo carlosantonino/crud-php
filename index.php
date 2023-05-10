@@ -12,32 +12,42 @@
     <title>Crud php</title>
 </head>
 <body>
-   <?php 
-        if(isset($_POST['nome'])) 
+    <?php 
+    if(isset($_POST['nome'])) 
         // clicou no botao cadastrar ou editar
         {
             // --------------EDITAR------------------------------
-            if(isset($_GET['id_up']) && !empty($_GET['id_up']))
+            if(isset($_GET['id_up']) && !empty($_GET['id_up'])) 
+            /** 
+             * isset($_GET['id_up']): isset() 
+             * é uma função PHP que verifica se uma variável ou um elemento de matriz está definido. 
+             * Neste caso, está sendo verificado se o parâmetro GET chamado 'id_up' está presente na 
+             * URL. Se estiver presente, o valor retornado será verdadeiro (true); caso contrário, 
+             * será falso (false).             * 
+            */
             {
-            $id_upd = addslashes($_GET['id_up']);
+            $id_upd = addslashes($_GET['id_up']); //  Isso acessa o parâmetro GET chamado 'id_up', que foi passado na URL 
+            // e addslashes() função do PHP para tratamento de string
             $nome = addslashes($_POST['nome']);
             $telefone = addslashes($_POST['telefone']);
             $email = addslashes($_POST['email']);
 
-            if (!empty($nome) && !empty($telefone) && !empty($email))
+            if (!empty($nome) && !empty($telefone) && !empty($email)) // Verifica se nome , telefone e email
+            // foram passados com valor diferente de vazio
             {
                 // EDITAR
-                $p->atualizarDados($id_upd, $nome, $telefone, $email);
+                $p->atualizarDados($id_upd, $nome, $telefone, $email); // Se condição satisfaz então
+                // executa a função atualizarDados e vai para o index.php
                 header("location: index.php");
 
             }
                 else
                 
-                    {
+                    { // Se não satistez a condição cai nessa mensagem
                         ?>
                         <div class="aviso">
                             <img src="aviso.png">
-                           <h4>Preencha todos os campos</h4>
+                            <h4>Preencha todos os campos</h4> <!-- Mensagem que aparece na tela -->
                         </div>
                         <?php
                     }
